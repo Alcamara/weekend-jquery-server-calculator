@@ -2,17 +2,20 @@ console.log('JS');
 
 $(document).ready(readyNow)
 
-problem = {
+let problem = {
     num1: 0,
     num2: 0,
     operator: ''
 }
+
+let input = []
 
 function readyNow(){
     fetchSolution()
     $('#server-side-cal_form').on('click','#calculate', calculate)
     $('#server-side-cal_form').on('click','.operator', operator)
     $('#server-side-cal_form').on('click','#clear',clear)
+    $('#server-side-cal_form').on('click','.number',addInput)
 }
 
 
@@ -92,12 +95,11 @@ function fetchSolution(){
     })
 }
 
+function addInput(evt){
+    evt.preventDefault();
+    let number = $(this).data('number');
+    
+    input.push(number)
 
-function setDataToLocal(object){
-    localStorage.setItem('recentAnswer','object')
+    $('#input_1').attr('value',input.join(''))
 }
-
-// function getDataFromLocal(){
-//   const cat = localStorage.getItem('recentAnswer');
-
-// }
