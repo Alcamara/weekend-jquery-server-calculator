@@ -9,12 +9,14 @@
 
 
 .container{
-    width: 70%;
+    width: 80%;
     margin: 0 auto;
 }
 
 .row{
     display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
 /* =======================
@@ -23,12 +25,44 @@
 
 
 
-h1{
-    color :white;
-    text-align: center;
-}
 
 .title {
     background-color: blueviolet;
     padding: 2rem 0;
+    margin-bottom: 1.5rem;
+}
+
+.title h1{
+    color :white;
+    font-size: 3rem;
+    text-align: center;
+}
+
+
+/* ====================
+    form section
+=======================*/
+input {
+    width: 100px;
+}
+button{
+    padding: .1em 1em
+}
+
+/* ====================
+    results
+=================*/
+
+.history{
+    font-size: 1rem;
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.history h2{
+    font-size: 3em;
+}
+
+.history p{
+    font-size: 2em;
 }
