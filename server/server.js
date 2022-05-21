@@ -17,17 +17,20 @@ app.listen(PORT,()=>{
 })
 
 app.get('/problem',(req,res)=>{
-    console.log('step 3: sending data');
-    results.push(whichCalculationToDo(4,2,'/'))
-    results.push(whichCalculationToDo(4,2,'+'))
-    results.push(whichCalculationToDo(4,2,'x'))
     res.send(results)
+    console.log('step 3: sending data');
     req.sendStatus(201)
 })
 
 app.post('/problem',(req,res)=>{
-    console.log('step 2: get problem');
-    //results.push(whichCalculationToDo(4,2,'/'))
+    let problem = req.body
+    let num1 = Number(problem.num1) 
+    let num2 = Number(problem.num2) 
+    let op =  problem.operator
+
+    console.log('step 2: got problem', num1, num2, op);
+
+    results.push(whichCalculationToDo(num1,num2,op))
     
     res.sendStatus(200)
 })
