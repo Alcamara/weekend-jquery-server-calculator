@@ -9,6 +9,7 @@ problem = {
 }
 
 function readyNow(){
+    fetchSolution()
     $('#server-side-cal_form').on('click','#calculate', calculate)
     $('#server-side-cal_form').on('click','.operator', operator)
     $('#server-side-cal_form').on('click','#clear',clear)
@@ -17,9 +18,11 @@ function readyNow(){
 
 function operator(evt){
     evt.preventDefault();
-    let opOject = $(this).data()
-
-    problem.operator = findKey(opOject)
+    
+    let op = $(this).data('op')
+    
+    problem.operator = op
+    
 }
 
 function calculate(evt){
@@ -38,6 +41,7 @@ function calculate(evt){
         $('#input_1').val('')
         $('#input_2').val('')
         fetchSolution()
+        setDataToLocal(problem)
     })
     
 }
@@ -88,27 +92,12 @@ function fetchSolution(){
     })
 }
 
-function findKey(object){
-    let key;
 
-    for (const prop in object ) {
-        key = prop;
-    }
-
-    switch(key){
-        case 'add':
-            return object.add
-            break;
-        case 'sub':
-            return object.sub
-            break;
-        case 'multi':
-            return object.multi
-            break;
-        case 'divide':
-            return object.divide
-            break;
-    }
-
-
+function setDataToLocal(object){
+    localStorage.setItem('recentAnswer','object')
 }
+
+// function getDataFromLocal(){
+//   const cat = localStorage.getItem('recentAnswer');
+
+// }
