@@ -71,17 +71,17 @@ function fetchSolution(){
         url:'/problem',
         method:'GET'
     }).then((result)=>{
-        console.log(result);
-
+      
         let latestAns = result[result.length - 1].answer
 
         $('#latest_result').text(latestAns)
 
         $('.results').empty();
 
-        for (let solutions of result) {
+        for (let solution = result.length-1; solution >= 0; solution-- ) {
+            console.log(result[solution].expression);
             $('.results').append(`
-                <p>${solutions.expression}</p>
+                <p>${result[solution].expression}</p>
             `)
         }
 
