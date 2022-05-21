@@ -3,7 +3,9 @@ const bodyParser = require('body-parser');
 const app = express();
 const PORT = 3000;
 
-//const calculation = require('./calculation')
+const whichCalculationToDo = require('./whichCalculationToDo')
+
+let results = []
 
 app.use(express.static('server/public'));
 
@@ -14,9 +16,17 @@ app.listen(PORT,()=>{
     console.log("I'm listen 👂");
 })
 
-app.get('/results',(req,res)=>{
-    console.log('step 1: sending data');
-    res.send({num:4})
+app.get('/problem',(req,res)=>{
+    console.log('step 3: sending data');
+    results.push(whichCalculationToDo(4,2,'/'))
+    res.send(results)
+    req.sendStatus(201)
+})
+
+app.post('/problem',(req,res)=>{
+    console.log('step 2: get problem');
+    //results.push(whichCalculationToDo(4,2,'/'))
+    
     res.sendStatus(200)
 })
 
