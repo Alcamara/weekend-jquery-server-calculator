@@ -11,3 +11,9 @@ app.use(bodyParser.json());
 app.listen(PORT,()=>{
     console.log("I'm listen 👂");
 })
+
+app.get('/results',(req,res)=>{
+    console.log('step 1: sending data');
+    res.sendStatus(200)
+})
+
