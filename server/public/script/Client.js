@@ -11,6 +11,7 @@ problem = {
 function readyNow(){
     $('#server-side-cal_form').on('click','#calculate', calculate)
     $('#server-side-cal_form').on('click','.operator', operator)
+    $('#server-side-cal_form').on('click','#clear',clear)
 }
 
 
@@ -39,6 +40,29 @@ function calculate(evt){
         fetchSolution()
     })
     
+}
+
+function clear(evt){
+    evt.preventDefault();
+    let clear = {
+        data: $(this).attr('id')
+    }
+
+    console.log(clear);
+    
+    $.ajax({
+        url:'/problem',
+        method:"POST",
+        data: clear
+    }).then(()=>{
+
+        $('#latest_result').text('')
+        $('#input_1').val('')
+        $('#input_2').val('')
+        $('.results').empty()
+        console.log('requesting server to be clear by server');
+    })
+
 }
 
 function fetchSolution(){

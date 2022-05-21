@@ -19,10 +19,18 @@ app.listen(PORT,()=>{
 app.get('/problem',(req,res)=>{
     res.send(results)
     console.log('step 3: sending data');
-    req.sendStatus(201)
+    res.sendStatus(201)
 })
 
 app.post('/problem',(req,res)=>{
+    console.log(req.body.data);
+    if(req.body.data === 'clear'){
+
+        results = [];
+        console.log('results history cleared');
+        res.sendStatus(202)
+    } else {
+
     let problem = req.body
     let num1 = Number(problem.num1) 
     let num2 = Number(problem.num2) 
@@ -33,5 +41,6 @@ app.post('/problem',(req,res)=>{
     results.push(whichCalculationToDo(num1,num2,op))
     
     res.sendStatus(200)
+    }
 })
 
