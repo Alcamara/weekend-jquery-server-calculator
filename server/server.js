@@ -19,6 +19,8 @@ app.listen(PORT,()=>{
 app.get('/problem',(req,res)=>{
     console.log('step 3: sending data');
     results.push(whichCalculationToDo(4,2,'/'))
+    results.push(whichCalculationToDo(4,2,'+'))
+    results.push(whichCalculationToDo(4,2,'x'))
     res.send(results)
     req.sendStatus(201)
 })
