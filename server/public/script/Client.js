@@ -15,7 +15,7 @@ function readyNow(){
     $('#server-side-cal_form').on('click','#calculate', calculate)
     $('#server-side-cal_form').on('click','.operator', operator)
     $('#server-side-cal_form').on('click','#clear',clear)
-    $('#server-side-cal_form').on('click','.number',addInput)
+    $('#server-side-cal_form').on('click','.number',numberInput)
 }
 
 
@@ -23,9 +23,15 @@ function operator(evt){
     evt.preventDefault();
     
     let op = $(this).data('op')
-    
+    console.log(op);
     problem.operator = op
-    
+    console.log(problem);
+    input.push(op)
+    console.log(input);
+    let join = input.join('')
+    console.log(join);
+
+    $('#input_1').attr('value',join)
 }
 
 function calculate(evt){
@@ -95,7 +101,7 @@ function fetchSolution(){
     })
 }
 
-function addInput(evt){
+function numberInput(evt){
     evt.preventDefault();
     let number = $(this).data('number');
     
