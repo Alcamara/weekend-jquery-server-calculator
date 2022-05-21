@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "s-main":"git checkout main",
     "add":"git add .",
     "g-push":"git push origin main",
     "start": "nodemon server/server.js"
