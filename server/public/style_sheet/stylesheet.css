@@ -17,7 +17,7 @@
 .row{
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    
 }
 
 /* =======================
@@ -44,7 +44,7 @@
     form section
 =======================*/
 input {
-    width: 75px;
+    width: 111px;
 }
 button{
     padding: .1em 1em

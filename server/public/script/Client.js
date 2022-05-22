@@ -2,17 +2,21 @@ console.log('JS');
 
 $(document).ready(readyNow)
 
-problem = {
-    num1: 0,
-    num2: 0,
+let problem = {
+    num1: '',
+    num2: '',
     operator: ''
 }
 
+let input = []
+
 function readyNow(){
+
     fetchSolution()
     $('#server-side-cal_form').on('click','#calculate', calculate)
     $('#server-side-cal_form').on('click','.operator', operator)
     $('#server-side-cal_form').on('click','#clear',clear)
+    $('#server-side-cal_form').on('click','.number',numberInput)
 }
 
 
@@ -23,13 +27,21 @@ function operator(evt){
     
     problem.operator = op
     
+    input.push(op)
+    
+    let join = input.join('')
+
+    $('#input_1').attr('value',join)
 }
 
 function calculate(evt){
     evt.preventDefault();
 
-    problem.num1 = Number($('#input_1').val())
-    problem.num2 = Number($('#input_2').val())
+    let expression = $('#input_1').val()
+
+    console.log( expression);
+
+    convertIntoObject(expression)
 
     console.log(problem);
 
@@ -39,9 +51,14 @@ function calculate(evt){
         data: problem
     }).then(()=>{
         $('#input_1').val('')
-        $('#input_2').val('')
+        $('#input_1').attr('value','')
+        input = []
+        problem.num1= '';
+        problem.num2= ''
+        location.reload()
         fetchSolution()
-        setDataToLocal(problem)
+        
+
     })
     
 }
@@ -75,7 +92,7 @@ function fetchSolution(){
         url:'/problem',
         method:'GET'
     }).then((result)=>{
-      
+
         let latestAns = result[result.length - 1].answer
 
         $('#latest_result').text(latestAns)
@@ -92,12 +109,45 @@ function fetchSolution(){
     })
 }
 
+function numberInput(evt){
+    evt.preventDefault();
+    let number = $(this).data('number');
+    
+    input.push(number)
 
-function setDataToLocal(object){
-    localStorage.setItem('recentAnswer','object')
+    $('#input_1').attr('value',input.join(''))
 }
 
-// function getDataFromLocal(){
-//   const cat = localStorage.getItem('recentAnswer');
+function convertIntoObject(expression) {
+    let index = 0;
+    console.log(expression);
+    
+    for(let i = 0; i < expression.length-1; i++){
+        if(expression[i] === '+'|| expression[i] === '-'||expression[i] === 'x' || expression[i] === '/'){
+            index = i;
+            index++
+            console.log(expression[index]);
+            break;
+        }
 
-// }
+        problem.num1 += expression[i]
+    }
+
+
+
+    for(let i = index; i < expression.length; i++){
+        if(expression[i] === '+'){
+            index = i;
+            break;
+        }
+
+        problem.num2 += expression[i]
+    }
+
+
+
+    
+
+
+
+}
