@@ -11,6 +11,7 @@ let problem = {
 let input = []
 
 function readyNow(){
+
     fetchSolution()
     $('#server-side-cal_form').on('click','#calculate', calculate)
     $('#server-side-cal_form').on('click','.operator', operator)
@@ -38,7 +39,7 @@ function calculate(evt){
 
     let expression = $('#input_1').val()
 
-    console.log(typeof expression);
+    console.log( expression);
 
     convertIntoObject(expression)
 
@@ -50,9 +51,14 @@ function calculate(evt){
         data: problem
     }).then(()=>{
         $('#input_1').val('')
-        $('#input_2').val('')
+        $('#input_1').attr('value','')
+        input = []
+        problem.num1= '';
+        problem.num2= ''
+        location.reload()
         fetchSolution()
-        setDataToLocal(problem)
+        
+
     })
     
 }
@@ -86,7 +92,7 @@ function fetchSolution(){
         url:'/problem',
         method:'GET'
     }).then((result)=>{
-      
+
         let latestAns = result[result.length - 1].answer
 
         $('#latest_result').text(latestAns)
@@ -117,7 +123,7 @@ function convertIntoObject(expression) {
     console.log(expression);
     
     for(let i = 0; i < expression.length-1; i++){
-        if(expression[i] === '+'){
+        if(expression[i] === '+'|| expression[i] === '-'||expression[i] === 'x' || expression[i] === '/'){
             index = i;
             index++
             console.log(expression[index]);
