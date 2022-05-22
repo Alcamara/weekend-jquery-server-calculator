@@ -81,6 +81,7 @@ function clear(evt){
         $('#input_1').val('')
         $('#input_2').val('')
         $('.results').empty()
+        location.reload()
         console.log('requesting server to be clear by server');
     })
 
