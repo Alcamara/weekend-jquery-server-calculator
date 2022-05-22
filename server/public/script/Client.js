@@ -3,8 +3,8 @@ console.log('JS');
 $(document).ready(readyNow)
 
 let problem = {
-    num1: 0,
-    num2: 0,
+    num1: '',
+    num2: '',
     operator: ''
 }
 
@@ -23,13 +23,12 @@ function operator(evt){
     evt.preventDefault();
     
     let op = $(this).data('op')
-    console.log(op);
+    
     problem.operator = op
-    console.log(problem);
+    
     input.push(op)
-    console.log(input);
+    
     let join = input.join('')
-    console.log(join);
 
     $('#input_1').attr('value',join)
 }
@@ -37,8 +36,11 @@ function operator(evt){
 function calculate(evt){
     evt.preventDefault();
 
-    problem.num1 = Number($('#input_1').val())
-    problem.num2 = Number($('#input_2').val())
+    let expression = $('#input_1').val()
+
+    console.log(typeof expression);
+
+    convertIntoObject(expression)
 
     console.log(problem);
 
@@ -108,4 +110,38 @@ function numberInput(evt){
     input.push(number)
 
     $('#input_1').attr('value',input.join(''))
+}
+
+function convertIntoObject(expression) {
+    let index = 0;
+    console.log(expression);
+    
+    for(let i = 0; i < expression.length-1; i++){
+        if(expression[i] === '+'){
+            index = i;
+            index++
+            console.log(expression[index]);
+            break;
+        }
+
+        problem.num1 += expression[i]
+    }
+
+
+
+    for(let i = index; i < expression.length; i++){
+        if(expression[i] === '+'){
+            index = i;
+            break;
+        }
+
+        problem.num2 += expression[i]
+    }
+
+
+
+    
+
+
+
 }
