@@ -12,9 +12,9 @@
 
 _Duration: 2 day Sprint_
 
-Directly above this is how long it took you to develop the project. Your project description goes here. What problem did you solve? How did you solve it? 
+This server-side calculator allows users to enter a math problem and returns a solution. The computation is done on the server-side and returned to the user to be displayed.  
 
-
+One of the many challenges I faced while building this app was figuring out how to allow users to input numbers and a math operator in the text field only using the buttons. To access the value for each button, I assigned either a data-op or a data-number attribute to their corresponding button. Then their value are push into an array and added to the text input value attribute.
 
 ## Screen Shot
 
@@ -27,7 +27,8 @@ Directly above this is how long it took you to develop the project. Your project
 Link to software that is required to install the app (e.g. node).
 
 - [Node.js](https://nodejs.org/en/)
-- List other prerequisites here
+- [Express](https://expressjs.com/)
+- [Body-Parser](https://www.npmjs.com/package/body-parser)
 
 ## Installation
 
