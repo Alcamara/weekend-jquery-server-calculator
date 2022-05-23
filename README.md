@@ -20,6 +20,8 @@ Directly above this is how long it took you to develop the project. Your project
 
  <img src="./images/cal1.png" alt="Calculator" height='200'>
 
+ <img src="./images/cal2.gif" alt="Calculator" height='300'>
+
 ### Prerequisites
 
 Link to software that is required to install the app (e.g. node).
