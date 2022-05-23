@@ -31,6 +31,10 @@ One of the many challenges I faced while building this app was figuring out how 
 ## Installation
 
 
+1. Open up your editor of choice and install express and body-parser in terminal by running `npm install insert_module` 
+2. Open your browser and type in locolhost:3000 to view calculator
+
+
 ## Built With
 
 - HTML
