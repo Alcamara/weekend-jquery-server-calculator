@@ -18,7 +18,7 @@ Directly above this is how long it took you to develop the project. Your project
 
 ## Screen Shot
 
- ![alt calulator](cal1.png)
+ <img src="/image/cal1.png" alt="Calculator">
 
 ### Prerequisites
 
