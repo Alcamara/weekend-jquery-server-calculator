@@ -18,7 +18,7 @@ Directly above this is how long it took you to develop the project. Your project
 
 ## Screen Shot
 
- <img src="../../images/Screen Shot 2022-05-23 at 2.18.16 AM.png" alt="">
+ <img src="../../images/cal1.png" alt="">
 
 ### Prerequisites
 
