@@ -14,57 +14,52 @@ function readyNow(){
 
     fetchSolution()
     $('#server-side-cal_form').on('click','#calculate', calculate)
-    $('#server-side-cal_form').on('click','.operator', operator)
+    $('#server-side-cal_form').on('click','.operator', operatorInput)
     $('#server-side-cal_form').on('click','#clear',clear)
     $('#server-side-cal_form').on('click','.number',numberInput)
 }
 
 
-function operator(evt){
-    evt.preventDefault();
-    
-    let op = $(this).data('op')
-    
-    problem.operator = op
-    
-    input.push(op)
-    
-    let join = input.join('')
-
-    $('#input_1').attr('value',join)
-}
-
+/*
+On click of '=' button, value from text 
+input gets store in expression variable.
+That expression gets convert into an 
+object and sent to the server for calculation.
+Once object is sent to server, all data is 
+erased then results are returned client 
+*/ 
 function calculate(evt){
+
     evt.preventDefault();
 
     let expression = $('#input_1').val()
 
-    console.log( expression);
-
     convertIntoObject(expression)
 
-    console.log(problem);
+    //console.log(problem);
 
     $.ajax({
         url:'/problem',
         method:"POST",
         data: problem
     }).then(()=>{
-        $('#input_1').val('')
-        $('#input_1').attr('value','')
-        input = []
-        problem.num1= '';
-        problem.num2= ''
-        location.reload()
+        eraseAllData()
         fetchSolution()
         
-
     })
     
 }
 
+/*
+On click of 'C' button, id value is store to 
+the clear object and sent to the server.
+Once object is sent to server add data is 
+erased
+*/ 
 function clear(evt){
+
     evt.preventDefault();
+
     let clear = {
         data: $(this).attr('id')
     }
@@ -78,15 +73,19 @@ function clear(evt){
     }).then(()=>{
 
         $('#latest_result').text('')
-        $('#input_1').val('')
-        $('#input_2').val('')
         $('.results').empty()
-        location.reload()
+        eraseAllData()
+        
         console.log('requesting server to be clear by server');
     })
 
 }
 
+/*
+Gets solution object from server and 
+displays the result of recent 
+and all previous calculations
+*/ 
 function fetchSolution(){
 
     $.ajax({
@@ -110,15 +109,34 @@ function fetchSolution(){
     })
 }
 
+/*
+when a number or operator button is click,
+value is store and push to array.
+Once number is push to array,the 
+array is added to the input value
+*/ 
 function numberInput(evt){
     evt.preventDefault();
+    
     let number = $(this).data('number');
     
-    input.push(number)
-
-    $('#input_1').attr('value',input.join(''))
+    push2Arr(number)   
 }
 
+function operatorInput(evt){
+    evt.preventDefault();
+    
+    let op = $(this).data('op')
+    
+    problem.operator = op
+    
+    push2Arr(op)
+}
+
+/* 
+Function takes in a string and separates 
+the variable into problem.num1 and problem.num1 properties
+*/ 
 function convertIntoObject(expression) {
     let index = 0;
     console.log(expression);
@@ -145,10 +163,24 @@ function convertIntoObject(expression) {
         problem.num2 += expression[i]
     }
 
+}
 
+/*
+function that takes in variable and push it 
+to an array. Once variable is push to input array,
+the array is added into the value attribute.
+*/
+function push2Arr(dataType) {
+    input.push(dataType)
 
-    
+    $('#input_1').attr('value',input.join(''))
+}
 
-
-
+function eraseAllData() {
+    $('#input_1').val('')
+    $('#input_1').attr('value','')
+    input = []
+    problem.num1= '';
+    problem.num2= ''
+    location.reload()
 }
