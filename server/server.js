@@ -24,12 +24,6 @@ app.get('/problem',(req,res)=>{
 
 app.post('/problem',(req,res)=>{
     console.log(req.body.data);
-    if(req.body.data === 'clear'){
-
-        results = [];
-        console.log('results history cleared');
-        res.sendStatus(202)
-    } else {
 
     let problem = req.body
     let num1 = Number(problem.num1) 
@@ -41,6 +35,15 @@ app.post('/problem',(req,res)=>{
     results.push(whichCalculationToDo(num1,num2,op))
     
     res.sendStatus(200)
-    }
+    
+})
+
+app.delete('/problem',(req,res)=>{
+    if(req.body.data === 'delete'){
+
+        results = [];
+        console.log('results history cleared');
+        res.sendStatus(202)
+    } 
 })
 

@@ -15,8 +15,18 @@ function readyNow(){
     fetchSolution()
     $('#server-side-cal_form').on('click','#calculate', calculate)
     $('#server-side-cal_form').on('click','.operator', operatorInput)
-    $('#server-side-cal_form').on('click','#clear',clear)
+    $('#server-side-cal_form').on('click','#delete',onDelete)
+    //$('#server-side-cal_form').on('click','#clear',onclear)
     $('#server-side-cal_form').on('click','.number',numberInput)
+    mouseEvent()
+    
+}
+
+function mouseEvent() {
+    $('.results').on('click','.result',()=>{
+        let id = $(this).data('id')
+        console.log('I am in here', id);
+    })
 }
 
 
@@ -56,12 +66,12 @@ function calculate(evt){
 }
 
 /*
-On click of 'C' button, id value is store to 
+On click of 'D' button, id value is store to 
 the clear object and sent to the server.
 Once object is sent to server add data is 
 erased
 */ 
-function clear(evt){
+function onDelete(evt){
 
     evt.preventDefault();
 
@@ -73,7 +83,7 @@ function clear(evt){
     
     $.ajax({
         url:'/problem',
-        method:"POST",
+        method:"DELETE",
         data: clear
     }).then(()=>{
 
@@ -107,7 +117,7 @@ function fetchSolution(){
         for (let solution = result.length-1; solution >= 0; solution-- ) {
             console.log(result[solution].expression);
             $('.results').append(`
-                <p>${result[solution].expression}</p>
+                <p data-id='${solution}' class='result' id='${solution}'>${result[solution].expression}</p>
             `)
         }
 

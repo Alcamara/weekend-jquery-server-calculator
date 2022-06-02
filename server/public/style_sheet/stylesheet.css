@@ -62,8 +62,9 @@ button{
 }
 
 form{
+    background-color: gray;
     height: 342px;
-    width: 300px;
+    width: 350px;
     margin: 0 auto;
     border: 1px solid black;
     border-radius: .5rem;
@@ -86,4 +87,9 @@ form{
 
 .history p{
     font-size: 2em;
+}
+
+.result:hover{
+    background-color: rgb(151, 147, 147);
+    cursor: pointer;
 }
