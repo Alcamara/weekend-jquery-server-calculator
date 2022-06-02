@@ -34,19 +34,24 @@ function calculate(evt){
 
     let expression = $('#input_1').val()
 
-    convertIntoObject(expression)
+    let isValidExpression = isIsThereAnyLetterInExpression(expression);
 
-    //console.log(problem);
+    if(isValidExpression){
 
-    $.ajax({
-        url:'/problem',
-        method:"POST",
-        data: problem
-    }).then(()=>{
-        eraseAllData()
-        fetchSolution()
+        convertIntoObject(expression)
+
+        $.ajax({
+            url:'/problem',
+            method:"POST",
+            data: problem
+        }).then(()=>{
+            eraseAllData()
+            fetchSolution()
         
-    })
+        })
+
+    }
+    
     
 }
 
@@ -183,4 +188,20 @@ function eraseAllData() {
     problem.num1= '';
     problem.num2= ''
     location.reload()
+}
+
+/*
+this function checks to see if element in the array
+is Not a Number and not equals to +,-,/,or x
+*/
+
+function isIsThereAnyLetterInExpression(expression) {
+    for (let ch of expression) {
+        if( isNaN(Number(ch)) && !(ch === '+') && !(ch === '-') && !(ch === '/') && !(ch === 'x') && !(ch === '.') ) {
+           alert('invalid entry', ch)
+           return false
+        }
+    }
+
+    return true
 }
